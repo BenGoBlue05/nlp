@@ -4,7 +4,9 @@ import './styles/form.scss'
 import './styles/footer.scss'
 import './styles/header.scss'
 
-const apiKey = '9a9113df4a0c4b02c2a4102247f992b1'
+let apiKey = ''
+
+const host = 'http://localhost:8080'
 
 function sentimentUrl(text = '') {
     return `https://api.meaningcloud.com/sentiment-2.1?key=${apiKey}&lang=en&txt=${text}`
@@ -38,6 +40,16 @@ function updateUI(data = {}) {
     const scoreTag = data.score_tag
     document.getElementById('results').innerHTML = `<h3>${scoreTagText(scoreTag)}</h3>`
 }
+
+window.addEventListener('load', () => {
+    fetch(`${host}/creds`)
+        .then(data => data.json())
+        .then(data => {
+            apiKey = data.key
+            console.log(`key: ${apiKey}`)
+        })
+        .catch(e => console.log('Error:', e))
+})
 
 document.getElementById('submit').addEventListener('click', () => {
     const text = document.getElementById('name').value

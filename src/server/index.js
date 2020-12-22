@@ -17,7 +17,8 @@ app.use(bodyParser.urlencoded({
 app.use(express.static('dist'))
 
 console.log(__dirname)
-console.log(`Your API key is ${process.env.API_KEY}`)
+const apiKey = process.env.API_KEY
+console.log(`Your API key is ${apiKey}`)
 
 app.get('/', (_, res) => {
     res.sendFile('dist/index.html')
@@ -25,3 +26,5 @@ app.get('/', (_, res) => {
 
 const port = 8080
 app.listen(port, () => console.log(`listening on port ${port}`))
+
+app.get('/creds', (_, res) => res.send({key: apiKey}))
