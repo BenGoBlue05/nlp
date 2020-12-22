@@ -9,6 +9,8 @@ module.exports = {
     devtool: 'inline-source-map',
     devServer: {
         contentBase: './dist',
+        open: true,
+        port: 3000
     },
     module: {
         rules: [
@@ -24,9 +26,11 @@ module.exports = {
         ]
     },
     plugins: [
-        new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
+        new CleanWebpackPlugin({cleanStaleWebpackAssets: false}),
         new HtmlWebPackPlugin({
-            title: "Development"
+            title: "Development",
+            template: "./src/client/views/index.html",
+            filename: "./index.html",
         })
     ],
     output: {
