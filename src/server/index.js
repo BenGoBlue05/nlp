@@ -1,3 +1,5 @@
+const dotenv = require('dotenv');
+dotenv.config();
 const path = require('path')
 const express = require('express')
 const bodyParser = require('body-parser')
@@ -15,10 +17,11 @@ app.use(bodyParser.urlencoded({
 app.use(express.static('dist'))
 
 console.log(__dirname)
+console.log(`Your API key is ${process.env.API_KEY}`)
 
 app.get('/', (_, res) => {
     res.sendFile('dist/index.html')
 })
 
 const port = 8080
-app.listen(8080, () => console.log(`listening on port ${port}`))
+app.listen(port, () => console.log(`listening on port ${port}`))

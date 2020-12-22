@@ -5,13 +5,11 @@ const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 
 module.exports = {
     entry: './src/client/index.js',
-    output: {
-        libraryTarget: 'var',
-        library: 'Client'
-    },
     mode: 'development',
-    devtool: 'source-map',
-    stats: 'verbose',
+    devtool: 'inline-source-map',
+    devServer: {
+        contentBase: './dist',
+    },
     module: {
         rules: [
             {
@@ -26,18 +24,13 @@ module.exports = {
         ]
     },
     plugins: [
+        new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
         new HtmlWebPackPlugin({
-            template: "./src/client/views/index.html",
-            filename: "./index.html"
-        }),
-        new CleanWebpackPlugin({
-            // Simulate the removal of files
-            dry: true,
-            // Write Logs to Console
-            verbose: true,
-            // Automatically remove all unused webpack assets on rebuild
-            cleanStaleWebpackAssets: true,
-            protectWebpackAssets: false
+            title: "Development"
         })
-    ]
+    ],
+    output: {
+        filename: '[name].bundle.js',
+        path: path.resolve(__dirname, 'dist'),
+    },
 }
