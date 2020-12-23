@@ -18,7 +18,11 @@ npm start
 Open http://localhost:3000/ in browser to view.
 
 ## Run tests
-`npm test`
+Tests are run using Jest
+```
+npm i -D
+npm test
+```
 
 ## Run Dev w/ Automatic Refresh
 Start prod (See 'How to run' above) and while that is running, in a separate terminal enter the following:
