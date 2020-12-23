@@ -5,7 +5,7 @@ import {scoreTagText} from "./js/sentiment-helper";
 
 let apiKey = ''
 
-const resultsDiv= document.getElementById('results')
+const resultsDiv = document.getElementById('results')
 
 function sentimentUrl(text = '') {
     return `https://api.meaningcloud.com/sentiment-2.1?key=${apiKey}&lang=en&txt=${text}`
@@ -29,7 +29,11 @@ window.addEventListener('load', () => {
 })
 
 document.getElementById('submit').addEventListener('click', () => {
-    resultsDiv.innerHTML = `<h3>...</h3>`
     const text = document.getElementById('text_input').value
-    loadSentimentAnalysis(sentimentUrl(text))
+    if (!text || text.trim().length === 0) {
+        alert('Please enter text')
+    } else {
+        resultsDiv.innerHTML = `<h3>...</h3>`
+        loadSentimentAnalysis(sentimentUrl(text))
+    }
 })
