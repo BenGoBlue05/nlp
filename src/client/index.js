@@ -9,8 +9,6 @@ import {scoreTagText} from "./js/sentiment-helper";
 
 let apiKey = ''
 
-const host = 'http://localhost:8080'
-
 function sentimentUrl(text = '') {
     return `https://api.meaningcloud.com/sentiment-2.1?key=${apiKey}&lang=en&txt=${text}`
 }
@@ -27,7 +25,7 @@ function updateUI(data = {}) {
 }
 
 window.addEventListener('load', () => {
-    fetchData(`${host}/creds`)
+    fetchData('/api')
         .then(data => apiKey = data.key)
         .catch(e => console.log('Error:', e))
 })

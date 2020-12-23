@@ -20,11 +20,11 @@ console.log(__dirname)
 const apiKey = process.env.API_KEY
 console.log(`Your API key is ${apiKey}`)
 
+const port = 3000
+app.listen(port, () => console.log(`listening on port ${port}`))
+
 app.get('/', (_, res) => {
     res.sendFile('dist/index.html')
 })
 
-const port = 8080
-app.listen(port, () => console.log(`listening on port ${port}`))
-
-app.get('/creds', (_, res) => res.send({key: apiKey}))
+app.get('/api', (_, res) => res.send({key: apiKey}))
