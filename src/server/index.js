@@ -27,4 +27,4 @@ app.get('/', (_, res) => {
     res.sendFile('dist/index.html')
 })
 
-app.get('/api', (_, res) => res.send({key: apiKey}))
+app.get('/api/key', (_, res) => res.send({key: apiKey}))

@@ -25,7 +25,7 @@ function updateUI(data = {}) {
 }
 
 window.addEventListener('load', () => {
-    fetchData('/api')
+    fetchData('/api/key')
         .then(data => apiKey = data.key)
         .catch(e => console.log('Error:', e))
 })
