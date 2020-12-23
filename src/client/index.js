@@ -1,13 +1,11 @@
-import './styles/resets.scss'
-import './styles/base.scss'
-import './styles/form.scss'
-import './styles/footer.scss'
-import './styles/header.scss'
+import './styles/main.scss'
 
 import {fetchData} from "./js/network-utils";
 import {scoreTagText} from "./js/sentiment-helper";
 
 let apiKey = ''
+
+const resultsDiv= document.getElementById('results')
 
 function sentimentUrl(text = '') {
     return `https://api.meaningcloud.com/sentiment-2.1?key=${apiKey}&lang=en&txt=${text}`
@@ -21,7 +19,7 @@ function loadSentimentAnalysis(url = '') {
 
 function updateUI(data = {}) {
     const scoreTag = data.score_tag
-    document.getElementById('results').innerHTML = `<h3>${scoreTagText(scoreTag)}</h3>`
+    resultsDiv.innerHTML = `<h3>${scoreTagText(scoreTag)}</h3>`
 }
 
 window.addEventListener('load', () => {
@@ -31,6 +29,7 @@ window.addEventListener('load', () => {
 })
 
 document.getElementById('submit').addEventListener('click', () => {
-    const text = document.getElementById('name').value
+    resultsDiv.innerHTML = `<h3>...</h3>`
+    const text = document.getElementById('text_input').value
     loadSentimentAnalysis(sentimentUrl(text))
 })

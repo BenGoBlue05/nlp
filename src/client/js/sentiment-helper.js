@@ -1,15 +1,15 @@
 export function scoreTagText(tag = 'NONE') {
     switch (tag) {
         case 'P+':
-            return 'Very Positive'
+            return '😀 Very Positive'
         case 'P':
-            return 'Positive'
+            return '🙂 Positive'
         case 'NEU':
-            return 'Neutral'
+            return '😐 Neutral'
         case 'N':
-            return 'Negative'
+            return '🙁 Negative'
         case 'N+':
-            return 'Very Negative'
+            return '☹️ Very Negative'
         default:
             return 'None'
     }
