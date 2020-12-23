@@ -4,6 +4,9 @@ import './styles/form.scss'
 import './styles/footer.scss'
 import './styles/header.scss'
 
+import {fetchData} from "./js/network-utils";
+import {scoreTagText} from "./js/sentiment-helper";
+
 let apiKey = ''
 
 const host = 'http://localhost:8080'
@@ -13,27 +16,9 @@ function sentimentUrl(text = '') {
 }
 
 function loadSentimentAnalysis(url = '') {
-    fetch(url)
-        .then(res => res.json())
+    fetchData(url)
         .then((data) => updateUI(data))
         .catch(e => console.log('Error:', e))
-}
-
-function scoreTagText(tag = 'NONE') {
-    switch (tag) {
-        case 'P+':
-            return 'Very Positive'
-        case 'P':
-            return 'Positive'
-        case 'NEU':
-            return 'Neutral'
-        case 'N':
-            return 'Negative'
-        case 'N+':
-            return 'Very Negative'
-        default:
-            return 'None'
-    }
 }
 
 function updateUI(data = {}) {
@@ -42,12 +27,8 @@ function updateUI(data = {}) {
 }
 
 window.addEventListener('load', () => {
-    fetch(`${host}/creds`)
-        .then(data => data.json())
-        .then(data => {
-            apiKey = data.key
-            console.log(`key: ${apiKey}`)
-        })
+    fetchData(`${host}/creds`)
+        .then(data => apiKey = data.key)
         .catch(e => console.log('Error:', e))
 })
 
