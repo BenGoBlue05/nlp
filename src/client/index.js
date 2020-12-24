@@ -7,6 +7,18 @@ let apiKey = ''
 
 const resultsDiv = document.getElementById('results')
 
+function fetchApiKey() {
+    fetchData('/api/key')
+        .then(data => {
+            apiKey = data.key
+            localStorage.setItem('apiKey', apiKey)
+        })
+        .catch(e => {
+            console.log('Error:', e)
+            apiKey = localStorage.getItem('apiKey')
+        })
+}
+
 function sentimentUrl(text = '') {
     return `https://api.meaningcloud.com/sentiment-2.1?key=${apiKey}&lang=en&txt=${text}`
 }
@@ -23,9 +35,7 @@ function updateUI(data = {}) {
 }
 
 window.addEventListener('load', () => {
-    fetchData('/api/key')
-        .then(data => apiKey = data.key)
-        .catch(e => console.log('Error:', e))
+    fetchApiKey()
 })
 
 document.getElementById('submit').addEventListener('click', () => {
